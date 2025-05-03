@@ -1,8 +1,9 @@
 body {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
     text-align: center;
     font-size: 2em;
     transition: font-size 0.3s ease;
+    margin: auto;
 }
 @media (orientation: landscape) {
     body {
