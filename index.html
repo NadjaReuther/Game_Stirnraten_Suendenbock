@@ -5,63 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#3498db">
+    <meta name="theme-color" content="#EBCFA7">
     <link rel="manifest" href="manifest.json"/>
     <link rel="stylesheet" href="style.css">
     <title>Stirnraten</title>
 </head>
 <body>
-    <!-- Orientierungswarnung -->
-    <div class="warning-message">
-        <div class="warning-icon">⤢</div>
-        <p>Bitte drehe dein Handy ins Querformat um zu spielen.</p>
-    </div>
+    <div class="header">Stirnsünde</div>
 
-    <!-- Ladebildschirm -->
-    <div class="fullscreen-overlay" id="loading-screen">
-        <div class="loader"></div>
-    </div>
-
-    <!-- Spielinhalt -->
-    <div class="game-content" id="game-start">
-        <div class="header">Stirnsünde</div>
-
-        <div class="game-area">
-            <!-- Wortanzeige -->
-            <div class="word-display" id="word">Willkommen beim Spiel Stirnsünde!</div>
-            <!-- Timer -->
-            <div class="timer" id="timer">60</div>
-
-            <!-- Kategorien -->
-             <div class="categories" id="categories">
-                <button class="category-btn active" data-category="tiere">Tiere</button>
-                <button class="category-btn" data-category="berufe">Berufe</button>
-                <button class="category-btn" data-category="Promis">Promis</button>
-                <button class="category-btn" data-category="filme">Filme</button>
-                <button class="category-btn" data-category="gemischt">Gemischt</button>
-            </div>
-
-            <!-- Steuerung -->
-            <div class="controls">
-                <button class="btn" id="anleitung">Anleitung</button>
-                <button class="btn" id="startBtn">Start</button>
-                <button id="wrongBtn">Falsch</button>
-            </div>
-            <!-- Score -->
-            <div id="score">Punkte: 0</div>
+    <div class="game-area">
+        <!-- Wortanzeige -->
+        <div class="word-display" id="word">Willkommen beim Spiel Stirnsünde!</div>
+        <!-- Timer -->
+        <div class="timer" id="timer">60</div>
+        <!-- Steuerung -->
+        <div class="controls">
+            <button class="btn" id="anleitung">Anleitung</button>
+            <button class="btn" id="startBtn">Start</button>
         </div>
-        
-        <!-- Anleitung -->
-        <div class="tutorial" id="tutorial" style="display: none;">
-            <p>Hier ist die Anleitung für das Spiel Stirnsünde.</p>
-            <h2>So wird gespielt:</h2>
-            <p>1. Wähle eine Kategorie und drücke auf Start.</p>
-            <p>2. Halte das Handy im Querformat an deine Stirn, mit dem Bildschirm nach außen zeigend.</p>
-            <p>3. Die anderen Spieler beschreiben dir das angezeigte Wort, ohne es zu nennen.</p>
-            <p>4. Rate das Wort! Wenn du es erraten hast, neige das Handy nach vorne, um zum nächsten Wort zu gelangen.</p>
-            <button class="btn" id="closeTutorial">Verstanden</button>
-        </div>
+        <!-- Score -->
+        <div id="score">Punkte: 0</div>
     </div>
+    
+    <!-- Anleitung -->
+    <div class="tutorial" id="tutorial" style="display: none;">
+        <p>Hier ist die Anleitung für das Spiel Stirnsünde.</p>
+        <h2>So wird gespielt:</h2>
+        <p>1. Wähle eine Kategorie und drücke auf Start.</p>
+        <p>2. Halte das Handy im Querformat an deine Stirn, mit dem Bildschirm nach außen zeigend.</p>
+        <p>3. Die anderen Spieler beschreiben dir das angezeigte Wort, ohne es zu nennen.</p>
+        <p>4. Rate das Wort! Wenn du es erraten hast, neige das Handy nach vorne, um zum nächsten Wort zu gelangen.</p>
+        <button class="btn" id="closeTutorial">Verstanden</button>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

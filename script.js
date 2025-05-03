@@ -4,40 +4,25 @@
 //     });
 // }
 
-const words = {
-    gemischt: [
-        "Fran Kerner", "Engel Lengenfelder", "Jewa Brand", "Okko Brand"
-    ]};
+const words = ["Fran Kerner", "Engel Lengenfelder", "Jewa Brand", "Okko Brand"];
 
-let currentWord = '';
+let remainigWords = [];
 let score = 0;
-let timer = 30;
-let timerInterval;
+let timer = 60;
+let timerInterval = null;
 let gameStarted = false;
-let currentCategory = 'Gemischt';
-
+let detector = null;
 // DOM-Elemente
 const wordDisplay = document.getElementById('wordDisplay');
 const startBtn = document.getElementById('startBtn');
 const anleitungBtn = document.getElementById('anleitung');
 const tutorial = document.getElementById('tutorial');
 const closeTutorialBtn = document.getElementById('closeTutorial');
-const categoryBtns = document.querySelectorAll('.category-btn');
 const timerElement = document.getElementById('timer');
-const loadingScreen = document.getElementById('loading-screen');
-const categoriesElement = document.getElementById('categories');
 const scoreElement = document.getElementById('score');
 
  // Event Listeners
  document.addEventListener('DOMContentLoaded', () => {
-    // Ladebildschirm ausblenden nach kurzer Verzögerung
-    setTimeout(() => {
-      loadingScreen.style.opacity = '0';
-      setTimeout(() => {
-        loadingScreen.style.display = 'none';
-      }, 300);
-    }, 1000);
-
      // Event Listener für Buttons
      startBtn.addEventListener('click', startGame);
      anleitungBtn.addEventListener('click', showTutorial);
@@ -45,51 +30,47 @@ const scoreElement = document.getElementById('score');
        tutorial.style.display = 'none';
     });
 
-    // Event Listener für Kategorie-Buttons
-    categoryBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          // Nur Kategoriewechsel erlauben, wenn kein Spiel läuft
-          if (!spielLäuft) {
-            categoryBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            aktuelleKategorie = btn.dataset.category;
-          }
-        });
-      });
 
-        // Stirn-Detektor initialisieren
-        detector = new ForeheadDetector({
-            onForeheadPosition: () => {
-              if (spielLäuft) {
+    // Stirn-Detektor initialisieren
+    detector = new ForeheadDetector({
+        onForeheadPosition: () => {
+            if (gameStarted) {
                 wordDisplay.style.display = 'block';
-              }
-            },
-            onNormalPosition: () => {
-              if (spielLäuft) {
+            }
+        },
+        onNormalPosition: () => {
+            if (gameStarted) {
                 wordDisplay.style.display = 'none';
                 // Automatisch nächstes Wort, wenn Gerät zurück in normale Position gebracht wird
-                zeigeNeuesWort();
-              }
+                nextWord();
             }
-          });
-        });
+        }
+    });
+    
 // fetch('words.json')
 //     .then(response => response.json())
 //     .then(data => {
 //         words = data
 //     });
+// Erzwinge die Querformat-Ausrichtung
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock('landscape').catch(function(error) {
+        console.log('Orientierung konnte nicht gesperrt werden: ', error);
+        });
+    }
+});
 
 function startGame() {
     if (!gameStarted) {
-        //Kategorien ausblenden
-        categoriesElement.style.display = 'none';
         // Timer anzeigen
         timerElement.style.visibility = 'visible';
-        
         // Wörterliste erstellen und mischen
-        words = [...words[currentCategory]];
-        shuffleArray(words);
+        remainigWords = [...words];
+        shuffleArray(remainigWords);
         gameStarted = true;
+        // Start-Button-Text ändern
+        startBtn.textContent = 'Pause';
+
         detector.start(); // Stirn-Detektor starten
         nextWord();
         startTimer();
@@ -103,12 +84,12 @@ function startGame() {
 }
 
 function nextWord() {
-    if (words.length === 0) {
-        words = [...words[currentCategory]]; // Wörter zurücksetzen
-        shuffleArray(words); // Wörter mischen
+    if (remainigWords.length === 0) {
+        remainigWords = [...words]; // Wörter zurücksetzen
+        shuffleArray(remainigWords); // Wörter mischen
     }
     
-    currentWord = words.pop(); // Nächstes Wort holen
+    const currentWord = remainigWords.pop(); // Nächstes Wort holen
     wordDisplay.textContent = currentWord;
 }
 
@@ -137,7 +118,6 @@ function endGame() {
     scoreElement.textContent = `Spiel beendet! Deine Punktzahl: ${score}`;
     score = 0; // Punkte zurücksetzen
     startBtn.textContent = 'Neu starten';
-    categoriesElement.style.display = 'flex'; // Kategorien wieder anzeigen
 }
 
 function showTutorial() {
