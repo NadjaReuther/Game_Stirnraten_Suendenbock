@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json"/>
+    <link rel="stylesheet" href="style.css">
     <title>Stirnraten</title>
 </head>
 <body>
-    <div id="word">Drücke Start</div>
-    <button id="startBtn">Start</button>
-    <div id="timer">30</div>
-    <div id="score">Punkte: 0</div>
-
+    <div id="orientation-warning" style="display: none;">
+        <p>Bitte das Smartphone quer halten!</p>
+    </div>
+    <div id="game-content">
+        <div id="word">Drücke Start</div>
+        <button id="startBtn">Start</button>
+        <div id="timer">30</div>
+        <div id="score">Punkte: 0</div>
+    </div>
 
     <script src="script.js"></script>
+    <script src="game_settings.js"></script>
 </body>
 </html>

@@ -1,0 +1,15 @@
+body {
+    transform: rotate(180deg);
+    text-align: center;
+    font-size: 2em;
+    transition: font-size 0.3s ease;
+}
+@media (orientation: landscape) {
+    body {
+        font-size: 4em;
+    }
+}
+#orientation-warning {
+    color: red;
+    font-size: 2em;
+}
