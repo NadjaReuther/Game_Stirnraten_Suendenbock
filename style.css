@@ -1,5 +1,5 @@
 body {
-    transform: rotate(180deg) scaleX(-1);
+    transform: rotate(90deg);
     text-align: center;
     font-size: 2em;
     transition: font-size 0.3s ease;
