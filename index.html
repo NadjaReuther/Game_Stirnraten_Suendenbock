@@ -6,14 +6,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#EBCFA7">
+    <meta http-equiv="ScreenOrientation" content="autoRotate: disabled">
     <link rel="manifest" href="manifest.json"/>
     <link rel="stylesheet" href="style.css">
     <title>Stirnraten</title>
 </head>
 <body>
-    <div class="header">Stirnsünde</div>
+    <div class="fullscreen-overlay" id="loading-screen">
+        <div class="loader"></div>
+    </div>
 
     <div class="game-area">
+        <div class="header">Stirnsünde</div>
         <!-- Wortanzeige -->
         <div class="word-display" id="word">Willkommen beim Spiel Stirnsünde!</div>
         <!-- Timer -->
@@ -25,19 +29,18 @@
         </div>
         <!-- Score -->
         <div id="score">Punkte: 0</div>
-    </div>
     
-    <!-- Anleitung -->
-    <div class="tutorial" id="tutorial" style="display: none;">
-        <p>Hier ist die Anleitung für das Spiel Stirnsünde.</p>
-        <h2>So wird gespielt:</h2>
-        <p>1. Wähle eine Kategorie und drücke auf Start.</p>
-        <p>2. Halte das Handy im Querformat an deine Stirn, mit dem Bildschirm nach außen zeigend.</p>
-        <p>3. Die anderen Spieler beschreiben dir das angezeigte Wort, ohne es zu nennen.</p>
-        <p>4. Rate das Wort! Wenn du es erraten hast, neige das Handy nach vorne, um zum nächsten Wort zu gelangen.</p>
-        <button class="btn" id="closeTutorial">Verstanden</button>
+        <!-- Anleitung -->
+        <div class="tutorial" id="tutorial" style="display: none;">
+            <p>Hier ist die Anleitung für das Spiel Stirnsünde.</p>
+            <h2>So wird gespielt:</h2>
+            <p>1. Drücke auf Start, um das Spiel zu beginnen.</p>
+            <p>2. Halte das Handy im Querformat an deine Stirn, mit dem Bildschirm nach außen zeigend.</p>
+            <p>3. Die anderen Spieler beschreiben dir das angezeigte Wort, ohne es zu nennen.</p>
+            <p>4. Rate das Wort! Wenn du es erraten hast, neige das Handy nach vorne, um zum nächsten Wort zu gelangen.</p>
+            <button class="btn" id="closeTutorial">Verstanden</button>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>

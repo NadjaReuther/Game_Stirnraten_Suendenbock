@@ -1,8 +1,8 @@
-// if('serviceWorker' in navigator) {
-//     navigator.serviceWorker.register('sw.js').then(() => {
-//         console.log('Service Worker registriert');
-//     });
-// }
+if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+    console.log('Service Worker registriert');
+    });
+}
 
 const words = ["Fran Kerner", "Engel Lengenfelder", "Jewa Brand", "Okko Brand"];
 
@@ -20,9 +20,18 @@ const tutorial = document.getElementById('tutorial');
 const closeTutorialBtn = document.getElementById('closeTutorial');
 const timerElement = document.getElementById('timer');
 const scoreElement = document.getElementById('score');
+const loadingScreen = document.getElementById('loading-screen');
 
  // Event Listeners
  document.addEventListener('DOMContentLoaded', () => {
+    // Ladebildschirm ausblenden, wenn die Seite vollständig geladen ist
+    // Ladebildschirm ausblenden nach kurzer Verzögerung
+    setTimeout(() => {
+        loadingScreen.style.opacity = '0';
+        setTimeout(() => {
+          loadingScreen.style.display = 'none';
+        }, 300);
+      }, 1000);
      // Event Listener für Buttons
      startBtn.addEventListener('click', startGame);
      anleitungBtn.addEventListener('click', showTutorial);
@@ -46,27 +55,14 @@ const scoreElement = document.getElementById('score');
             }
         }
     });
-    
-// fetch('words.json')
-//     .then(response => response.json())
-//     .then(data => {
-//         words = data
-//     });
-// Erzwinge die Querformat-Ausrichtung
-    if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.lock('landscape').catch(function(error) {
-        console.log('Orientierung konnte nicht gesperrt werden: ', error);
-        });
-    }
-});
-
+ });    
 function startGame() {
     if (!gameStarted) {
         // Timer anzeigen
         timerElement.style.visibility = 'visible';
         // Wörterliste erstellen und mischen
-        remainigWords = [...words];
-        shuffleArray(remainigWords);
+        loadWords(); // Wörter laden
+    
         gameStarted = true;
         // Start-Button-Text ändern
         startBtn.textContent = 'Pause';
@@ -83,15 +79,34 @@ function startGame() {
     }
 }
 
+function loadWords() {
+    remainigWords = [...words];
+    shuffleArray(remainigWords);
+
+     // API-Funktion für später:
+      /*
+      async function holeWoerterVonAPI() {
+        try {
+          const response = await fetch('https://deine-api-url.com/woerter');
+          const data = await response.json();
+          return data.woerter || [];
+        } catch (error) {
+          console.error('Fehler beim Laden der Wörter:', error);
+          return testWoerter; // Fallback zur lokalen Liste
+        }
+      }
+      */
+}
+
 function nextWord() {
     if (remainigWords.length === 0) {
-        remainigWords = [...words]; // Wörter zurücksetzen
-        shuffleArray(remainigWords); // Wörter mischen
+        loadWords(); // Wörter neu laden, wenn alle Wörter gespielt wurden
     }
     
     const currentWord = remainigWords.pop(); // Nächstes Wort holen
-    wordDisplay.textContent = currentWord;
+    wordDisplay.textContent = currentWord || "Kein Wort verfügbar";
 }
+
 
 function startTimer() {
     timer = 60; // Timer auf 30 Sekunden setzen
@@ -213,5 +228,12 @@ class ForeheadDetector {
     stop() {
         window.removeEventListener('deviceorientation', this.handleOrientation);
         clearTimeout(this.positionTimer);
-    }
+    }    
 }
+
+// Bildschirm im Querformat sperren, wenn möglich
+if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(function(error) {
+        console.log('Bildschirmorientierung konnte nicht gesperrt werden: ', error);
+    });
+    }

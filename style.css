@@ -15,6 +15,10 @@ body {
     flex-direction: column;
     touch-action: manipulation;
 }
+html, body {
+    width: 100vw;
+    height: 100vh;
+}
 .header {
     background-color:  #EDE8DB;
     color: grey;
@@ -97,6 +101,10 @@ body {
     max-width: 80%;
     line-height: 1.5;
 }
+.tutorial img {
+    max-width: 60%;
+    margin: 10px 0;
+}
 .timer {
     font-size: 24px;
     color: white;
@@ -106,3 +114,43 @@ body {
     margin-top: 20px;
     visibility: hidden;
 }
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s;
+  }
+  
+  .loader {
+    border: 5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top: 5px solid white;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Erzwinge Querformat durch CSS */
+  @media all and (orientation:portrait) {
+    body {
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      width: 100vh;
+      height: 100vw;
+      position: absolute;
+      top: 100%;
+      left: 0;
+    }
+  }
