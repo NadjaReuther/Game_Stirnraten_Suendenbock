@@ -14,6 +14,7 @@ let gameStarted = false;
 let detector = null;
 // DOM-Elemente
 const wordDisplay = document.getElementById('word-display');
+const header = document.getElementById('header');
 const startBtn = document.getElementById('startBtn');
 const anleitungBtn = document.getElementById('anleitung');
 const tutorial = document.getElementById('tutorial');
@@ -61,20 +62,19 @@ function startGame() {
     if (!gameStarted) {
         // Timer anzeigen
         timerElement.style.visibility = 'visible';
+        header.style.display = 'none';
+        startBtn.style.display = 'none';
         // Wörterliste erstellen und mischen
         loadWords(); // Wörter laden
     
         gameStarted = true;
-        // Start-Button-Text ändern
-        startBtn.textContent = 'Pause';
-
+        
         detector.start(); // Stirn-Detektor starten
         nextWord();
         startTimer();
     } else {
         // Pause
         gameStarted = false;
-        startBtn.textContent = 'Fortsetzen';
         wordDisplay.style.display = 'none';
         clearInterval(timerInterval);
     }
@@ -116,7 +116,7 @@ function incrementScore() {
 function startTimer() {
     timer = 60; // Timer auf 30 Sekunden setzen
     timerElement.textContent = `Zeit: ${timer}`;
-    
+
     //Timerinterval starten
     clearInterval(timerInterval); // Vorherige Intervalle löschen
     timerInterval = setInterval(() => {
@@ -135,6 +135,7 @@ function endGame() {
     detector.stop(); // Stirn-Detektor stoppen
     wordDisplay.style.display = 'none';
     timerElement.style.visibility = 'hidden'; // Timer ausblenden
+    header.style.display = 'block';
     scoreElement.textContent = `Spiel beendet! Deine Punktzahl: ${score}`;
     score = 0; // Punkte zurücksetzen
     startBtn.textContent = 'Neu starten';
@@ -162,7 +163,7 @@ class ForeheadDetector {
             //Schwellenwerte für die Erkennung
             alphaThreshold: 30, // Grad
             betaThreshold: 20, // Grad
-            gammaThreshold: 70, // Grad
+            gammaThreshold: 60, // Grad
             stabilityTime: 400, // Millisekunden, wie lange die Position stabil sein muss
             ...options
         };

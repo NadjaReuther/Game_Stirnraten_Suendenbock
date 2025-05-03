@@ -23,9 +23,11 @@
     </div>
 
     <div class="game-area">
-        <div class="header">Stirnsünde</div>
+        <div class="header" id="header">Stirnsünde</div>
         <!-- Wortanzeige -->
         <div class="word-display" id="word-display">Willkommen beim Spiel Stirnsünde!</div>
+        <!-- Score -->
+        <div id="score">Punkte: 0</div>
         <!-- Timer -->
         <div class="timer" id="timer">60</div>
         <!-- Steuerung -->
@@ -33,8 +35,7 @@
             <button class="btn" id="anleitung">Anleitung</button>
             <button class="btn" id="startBtn">Start</button>
         </div>
-        <!-- Score -->
-        <div id="score">Punkte: 0</div>
+        
     
         <!-- Anleitung -->
         <div class="tutorial" id="tutorial" style="display: none;">
@@ -48,6 +49,7 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="sw.js"></script>
     <script>
         // Prüfen, ob die App im Standalone-Modus (als PWA installiert) ausgeführt wird
         if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
