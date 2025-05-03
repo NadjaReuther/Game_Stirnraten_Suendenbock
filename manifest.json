@@ -2,7 +2,7 @@
     "name": "Stirnraten Sündenbock",
     "short_name": "Stirnsünde",
     "description": "Ein Spiel, bei dem die Personen aus Sündebock per Stirnraten erraten werden müssen.",
-    "start_url": "/index.html",
+    "start_url": "/Game_Stirnraten_Suendenbock/index.html",
     "display": "standalone",
     "orientation": "landscape",
     "background_color": "#EBCFA7",
