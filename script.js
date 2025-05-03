@@ -13,7 +13,7 @@ let timerInterval = null;
 let gameStarted = false;
 let detector = null;
 // DOM-Elemente
-const wordDisplay = document.getElementById('wordDisplay');
+const wordDisplay = document.getElementById('word-display');
 const startBtn = document.getElementById('startBtn');
 const anleitungBtn = document.getElementById('anleitung');
 const tutorial = document.getElementById('tutorial');
@@ -52,6 +52,7 @@ const loadingScreen = document.getElementById('loading-screen');
                 wordDisplay.style.display = 'none';
                 // Automatisch nächstes Wort, wenn Gerät zurück in normale Position gebracht wird
                 nextWord();
+                incrementScore(); // Punkte erhöhen
             }
         }
     });
@@ -107,6 +108,10 @@ function nextWord() {
     wordDisplay.textContent = currentWord || "Kein Wort verfügbar";
 }
 
+function incrementScore() {
+    score++; // Punkte erhöhen
+    scoreElement.textContent = `Punkte: ${score}`; // Punkte anzeigen
+}
 
 function startTimer() {
     timer = 60; // Timer auf 30 Sekunden setzen
@@ -190,7 +195,7 @@ class ForeheadDetector {
             this.positionTimer = setTimeout(() => {
                 this.isInForeheadPosition = isForeheadPositionNow;
          
-                if (this.isForeheadPositionNow) {
+                if (this.isInForeheadPosition) {
                     this.options.onForeheadPosition();
                 } else {
                     this.options.onNormalPosition();

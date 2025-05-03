@@ -1,0 +1,37 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EBCFA7" />
+      <stop offset="100%" stop-color="#D4B48E" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#00000044" />
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="512" height="512" rx="80" fill="url(#bg-gradient)" />
+  
+  <!-- Head silhouette -->
+  <g transform="translate(256, 256)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="150" fill="#F5F5F5" />
+    
+    <!-- Face outline -->
+    <path d="M0,-140 C80,-140 140,-80 140,0 C140,80 80,140 0,140 C-80,140 -140,80 -140,0 C-140,-80 -80,-140 0,-140 Z" 
+          fill="#3498db" stroke="#2980b9" stroke-width="5" />
+    
+    <!-- Text card on forehead -->
+    <rect x="-70" y="-80" width="140" height="60" rx="10" fill="white" stroke="#333" stroke-width="2" />
+    
+    <!-- Word on card -->
+    <text x="0" y="-40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">WORT</text>
+    
+    <!-- Simplified face -->
+    <circle cx="-35" cy="10" r="8" fill="#333" /> <!-- Left eye -->
+    <circle cx="35" cy="10" r="8" fill="#333" /> <!-- Right eye -->
+    <path d="M-40,60 Q0,90 40,60" stroke="#333" stroke-width="8" fill="none" /> <!-- Smile -->
+  </g>
+  
+  <!-- Game name -->
+  <text x="256" y="450" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="#333">Stirnsünde</text>
+</svg>

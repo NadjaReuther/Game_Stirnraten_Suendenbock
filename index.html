@@ -7,9 +7,15 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#EBCFA7">
     <meta http-equiv="ScreenOrientation" content="autoRotate: disabled">
+    <meta name="description" content="Stirnsünde - ein lustiges Stirnraten-Spiel für die Gilde Wolkenbruch">
+    
+    <!-- PWA Meta-Tags -->
     <link rel="manifest" href="manifest.json"/>
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
+    
     <link rel="stylesheet" href="style.css">
-    <title>Stirnraten</title>
+    <title>Stirnsünde</title>
 </head>
 <body>
     <div class="fullscreen-overlay" id="loading-screen">
@@ -19,7 +25,7 @@
     <div class="game-area">
         <div class="header">Stirnsünde</div>
         <!-- Wortanzeige -->
-        <div class="word-display" id="word">Willkommen beim Spiel Stirnsünde!</div>
+        <div class="word-display" id="word-display">Willkommen beim Spiel Stirnsünde!</div>
         <!-- Timer -->
         <div class="timer" id="timer">60</div>
         <!-- Steuerung -->
@@ -42,5 +48,11 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script>
+        // Prüfen, ob die App im Standalone-Modus (als PWA installiert) ausgeführt wird
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+            console.log('App wird als PWA ausgeführt');
+        }
+    </script>
 </body>
 </html>
