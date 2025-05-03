@@ -163,7 +163,7 @@ class ForeheadDetector {
             //Schwellenwerte für die Erkennung
             alphaThreshold: 30, // Grad
             betaThreshold: 20, // Grad
-            gammaThreshold: 60, // Grad
+            gammaThreshold: 70, // Grad
             stabilityTime: 400, // Millisekunden, wie lange die Position stabil sein muss
             ...options
         };
