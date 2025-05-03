@@ -47,10 +47,22 @@ function nextWord() {
 }
 
 window.addEventListener('deviceorientation', (event) => {
+    
+    const beta = Math.round(event.beta);
+    const gamma = Math.round(event.gamma);
+
+    document.getElementById('orientation-info').innerText = `Beta: ${beta}, Gamma: ${gamma}`;
+    // Drehung Display im Querformat
+    if(Math.abs(beta) > 88) {
+        document.body.style.transform = 'rotate(90deg)';
+    } else {
+        document.body.style.transform = 'rotate(0deg)';
+    }
+    
     if (!gameStarted) {
         return;
     }
-    if(event.beta > 60) {
+    if(event.beta > 80) {
         score++;
         document.getElementById('score').innerText = `Punkte: ${score}`;
         nextWord();
