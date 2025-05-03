@@ -1,26 +1,34 @@
-if('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
-        console.log('Service Worker registriert');
-    });
-}
+// if('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('sw.js').then(() => {
+//         console.log('Service Worker registriert');
+//     });
+// }
 
-let words = [];
+let words = ["Fran Kerner", "Engel Lengenfelder", "Jewa Brand", "Okko Brand"];
 let currentWord = '';
 let score = 0;
 let timer = 30;
 let timerInterval;
+let gameStarted = false;
 
-fetch('words.json')
-    .then(response => response.json())
-    .then(data => {
-        words = data
-    });
+// fetch('words.json')
+//     .then(response => response.json())
+//     .then(data => {
+//         words = data
+//     });
 
-document.getElementById('startBtn').addEventListener('click', startGame);
+document.getElementById('startBtn').addEventListener('click', () => {
+    if(!gameStarted) {
+        gameStarted = true;
+        startGame();
+    }
+});
 
 function startGame() {
     score = 0;
     timer = 30;
+    document.getElementById('score').innerText = `Punkte: ${score}`
+    document.getElementById('timer').innerText = timer;
     nextWord();
     timerInterval = setInterval(() => {
         timer--;
@@ -28,6 +36,7 @@ function startGame() {
         if(timer === 0) {
             clearInterval(timerInterval);
             alert(`Zeit vorbei! Punkte: ${score}`);
+            gameStarted = false;
         }
     }, 1000);
 }
@@ -38,6 +47,9 @@ function nextWord() {
 }
 
 window.addEventListener('deviceorientation', (event) => {
+    if (!gameStarted) {
+        return;
+    }
     if(event.beta > 60) {
         score++;
         document.getElementById('score').innerText = `Punkte: ${score}`;
